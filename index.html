@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        bdoy{
+            background-color: lightgray;
+        }
+        .container{
+            background-color: gray;
+            margin: auto;
+            border: 1px solid white;
+            border-radius: 3px;
+            text-align: center;
+            max-width: 300px;
+            width: 100%;
+            height: 100vh;
+            max-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .row{
+            margin: auto;
+            display: flex;
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            BMI Calculator
+        </h1>
+        <div class="row">
+            <input type="number" name="" id="magassag">
+        </div>
+        <div class="row">
+        <input type="number" name="" id="suly">
+        </div>
+        <div class="row">
+                <input type="button" value="Calculate" onclick="calculate()">
+                <input type="button" id="c" value="Clear" onclick="cclear()">
+        </div>
+        <div class="result">
+
+        </div>
+    </div>
+    <script>
+        const rules=[
+            {min:0,max:18.5,categ:'underweight',emoji:'🦴'},
+            {min:18.5,max:25,categ:'normal',emoji:'😀'},
+            {min:25,max:30,categ:'overweight',emoji:'😱'},
+            {min:30,max:35,categ:'obese',emoji:'🤢'},
+            {min:35,max:10000,categ:'extrem obese',emoji:'...'},          
+        ]
+        function calculate(){
+            let height = +document.getElementById("magassag").value / 100
+            let weight = +document.getElementById("suly").value
+            height == 0 ? height = Null : height
+            console.log(height)
+            let bmi = (weight / (height * height))
+            let result = rules.find(obj => bmi > obj.min && bmi <= obj.max)
+            console.log(result)
+            
+            document.querySelector('.result').innerHTML = "BMI: " + Math.round(bmi) + "<br>" + result.categ + result.emoji
+        }
+
+        function cclear(){
+            document.querySelector('.result').innerHTML = ""
+            document.getElementById('magassag').value = ""
+            document.getElementById('suly').value = ""
+
+
+
+        }
+    </script>
+</body>
+</html>
